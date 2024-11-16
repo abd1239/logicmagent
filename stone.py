@@ -1,28 +1,46 @@
-# ////////////////////////////////   2
-from stone_type_enum import StoneType
-from position import Position
+# ////////////////
+
+
+class StoneType:
+    REPEL = 1
+    ATTRACT = 2
+    STONE = 3
+    GOAL = 4
+    OBSTACLE = 5
+    EMPTY = 6
+    STONEANDGOAL = 7
+    REPELANDGOAL = 8
+    ATTRACTANDGOAL = 9
+
+
+class Position:
+    def __init__(self, x=0, y=0):
+        self.x = x
+        self.y = y
+
 
 class Stone:
-    def __init__(self, type=StoneType.EMPTY, can_move=True, position=Position(0, 0)):
-        self.type = type
-        self.name = ""
-        self.naming(type)
+    def __init__(self, stone_type=None, can_move=True, position=None):
+        if position is None:
+            position = Position(0, 0)
+        self.type = stone_type if stone_type is not None else StoneType.EMPTY
+        self.name = self.naming(self.type)
         self.can_move = can_move
         self.position = position
 
     def naming(self, stone_type):
         if stone_type == StoneType.REPEL:
-            self.name = " R "
+            return " R "
         elif stone_type == StoneType.ATTRACT:
-            self.name = " A "
+            return " A "
         elif stone_type == StoneType.STONE:
-            self.name = " S "
+            return " S "
         elif stone_type == StoneType.GOAL:
-            self.name = " G "
+            return " G "
         elif stone_type == StoneType.OBSTACLE:
-            self.name = " O "
+            return " O "
         elif stone_type == StoneType.EMPTY:
-            self.name = "   "
+            return "   "
 
     def repel(self, current_position):
         self.name = " R "
@@ -39,7 +57,7 @@ class Stone:
         return self
 
     def empty(self, current_position):
-        self.name = "  "
+        self.name = "   "
         self.type = StoneType.EMPTY
         self.can_move = True
         self.position = current_position
@@ -74,7 +92,7 @@ class Stone:
         return self
 
     def repel_and_goal(self, current_position):
-        self.name = "G+R"
+        self.name = "R+G"
         self.type = StoneType.REPELANDGOAL
         self.can_move = True
         self.position = current_position
@@ -88,7 +106,5 @@ class Stone:
         return self
 
 
-
-
-
-
+def remove_whitespace(s):
+    return "".join(s.split())

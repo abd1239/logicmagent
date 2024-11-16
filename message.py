@@ -4,7 +4,7 @@ class Message:
     def message(msg):
         height = 1
         width = len(msg) + 8
-        horizontal_line = '-' * width
+        horizontal_line = "-" * width
         vertical_line = f"| {msg}      |"
 
         # Print the top border
@@ -23,4 +23,3 @@ class Message:
                 print(horizontal_line)
             else:
                 print(f"| {' ' * (len(msg) + 8)} |")
-
